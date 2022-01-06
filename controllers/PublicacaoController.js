@@ -5,6 +5,7 @@ var PublicacaoController = require('../service/PublicacaoControllerService');
 
 module.exports.createPublicacao = function createPublicacao (req, res, next, body) {
   PublicacaoController.createPublicacao(body)
+    .then(PublicacaoController.retrievePublicacao)
     .then(function (response) {
       utils.writeJson(res, response);
     })
