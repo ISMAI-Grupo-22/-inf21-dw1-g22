@@ -1,0 +1,523 @@
+openapi: 3.0.0
+info:
+  title: Social
+  description: Connect with everyone
+  version: 0.0.1
+servers:
+- url: http://localhost:8080
+  description: My localhost
+  variables:
+    basePath:
+      default: /
+paths:
+  /Conta:
+    get:
+      tags:
+      - ContaController
+      summary: Retrieve conta
+      operationId: retrieveConta
+      responses:
+        "200":
+          description: Array of Conta model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Conta'
+                x-content-type: application/json
+            application/xml:
+              schema:
+                type: array
+                xml:
+                  name: Conta
+                items:
+                  $ref: '#/components/schemas/Conta'
+      x-swagger-router-controller: ContaController
+    post:
+      tags:
+      - ContaController
+      summary: Create conta
+      operationId: createConta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Conta'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Conta'
+      responses:
+        "200":
+          description: Creat a Conta model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conta'
+      x-swagger-router-controller: ContaController
+  /Conta/{id}:
+    get:
+      tags:
+      - ContaController
+      summary: Retrieve conta
+      operationId: retrieveContaId
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Retrieve Filme id 1
+            value: 1
+          two:
+            summary: Retrieve Filme id 2
+            value: 2
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conta'
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
+      x-swagger-router-controller: ContaController
+    put:
+      tags:
+      - ContaController
+      summary: Update conta
+      operationId: updateConta
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Update Conta id 1
+            value: 1
+          two:
+            summary: Update Conta id 2
+            value: 2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Conta'
+            examples:
+              FilmeExample01:
+                $ref: '#/components/examples/ContaExemplo01'
+              FilmeExample02:
+                $ref: '#/components/examples/ContaExemplo02'
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                description: Conta PUT success
+                x-content-type: application/json
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
+      x-swagger-router-controller: ContaController
+    delete:
+      tags:
+      - ContaController
+      summary: Delete Conta
+      operationId: deleteConta
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Delete Conta id 1
+            value: 1
+          two:
+            summary: Delete Conta id 2
+            value: 2
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: id not found
+      x-swagger-router-controller: ContaController
+  /Autenticacao:
+    get:
+      tags:
+      - AutenticacaoController
+      summary: Retrieve autenticacao
+      operationId: retrieveAutenticacao
+      responses:
+        "200":
+          description: Array of Autenticacao model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Autenticacao'
+                x-content-type: application/json
+            application/xml:
+              schema:
+                type: array
+                xml:
+                  name: Publicacao
+                items:
+                  $ref: '#/components/schemas/Autenticacao'
+      x-swagger-router-controller: AutenticacaoController
+  /Publicacao:
+    get:
+      tags:
+      - PublicacaoController
+      summary: Retrieve Publicacao
+      operationId: retrievePublicacao
+      responses:
+        "200":
+          description: Array of Publicacao model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Publicacao'
+                x-content-type: application/json
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Publicacao'
+      x-swagger-router-controller: PublicacaoController
+    post:
+      tags:
+      - PublicacaoController
+      summary: Create publicacao
+      operationId: createPublicacao
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publicacao'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Publicacao'
+      responses:
+        "200":
+          description: Creat a Publicacao model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publicacao'
+      x-swagger-router-controller: PublicacaoController
+  /Venda:
+    get:
+      tags:
+      - VendaController
+      summary: Retrieve venda
+      operationId: retrieveVenda
+      responses:
+        "200":
+          description: Array of Venda model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Venda'
+                x-content-type: application/json
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Venda'
+      x-swagger-router-controller: VendaController
+    post:
+      tags:
+      - VendaController
+      summary: Create venda
+      operationId: createVenda
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Venda'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Venda'
+      responses:
+        "200":
+          description: Creat a Venda model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venda'
+      x-swagger-router-controller: VendaController
+  /Venda/{id}:
+    get:
+      tags:
+      - VendaController
+      summary: Retrieve venda
+      operationId: retrieveVendaId
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Retrieve Venda id 1
+            value: 1
+          two:
+            summary: Retrieve Venda id 2
+            value: 2
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venda'
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
+      x-swagger-router-controller: VendaController
+    put:
+      tags:
+      - VendaController
+      summary: Update venda
+      operationId: updateVenda
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Update Venda id 1
+            value: 1
+          two:
+            summary: Update Venda id 2
+            value: 2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Venda'
+            examples:
+              FilmeExample01:
+                $ref: '#/components/examples/VendaExemplo01'
+              FilmeExample02:
+                $ref: '#/components/examples/VendaExemplo02'
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                description: Venda PUT success
+                x-content-type: application/json
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
+      x-swagger-router-controller: VendaController
+    delete:
+      tags:
+      - VendaController
+      summary: Delete venda
+      operationId: deleteVenda
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Delete Venda id 1
+            value: 1
+          two:
+            summary: Delete Venda id 2
+            value: 2
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: id not found
+      x-swagger-router-controller: VendaController
+components:
+  schemas:
+    Conta:
+      title: Conta
+      required:
+      - email
+      - genero
+      - nome
+      - senha
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nome:
+          type: string
+        genero:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+      additionalProperties: false
+      example:
+        senha: senha
+        genero: genero
+        nome: nome
+        id: 0
+        email: email
+    Autenticacao:
+      title: Autenticacao
+      required:
+      - email
+      - senha
+      type: object
+      properties:
+        email:
+          type: string
+        senha:
+          type: string
+      additionalProperties: false
+      example:
+        senha: senha
+        email: email
+    Publicacao:
+      title: Publicacao
+      required:
+      - descricao
+      - nome
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nome:
+          type: string
+        descricao:
+          type: string
+      additionalProperties: false
+      example:
+        nome: nome
+        id: 0
+        descricao: descricao
+    Venda:
+      title: Venda
+      required:
+      - artigo
+      - contacto
+      - quantidade
+      - valor
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        artigo:
+          type: string
+        quantidade:
+          type: integer
+          format: int64
+        valor:
+          type: integer
+          format: int64
+        contacto:
+          type: integer
+          format: int64
+      additionalProperties: false
+      example:
+        contacto: 5
+        valor: 1
+        id: 0
+        artigo: artigo
+        quantidade: 6
+  examples:
+    ContaExemplo01:
+      value:
+        id: 1
+        nome: Exemplo 01
+        genero: Masculino
+        email: exemplo01@ismai.pt
+        senha: exemplo01
+    ContaExemplo02:
+      value:
+        id: 2
+        nome: Exemplo 02
+        genero: Feminino
+        email: exemplo02@ismai.pt
+        senha: exemplo02
+    AutenticacaoExemplo01:
+      value:
+        email: exemplo01@ismai.pt
+        senha: exemplo01
+    AutenticacaoExemplo02:
+      value:
+        email: exemplo02@ismai.pt
+        senha: exemplo02
+    PublicacaoExemplo01:
+      value:
+        id: 1
+        nome: Exemplo 01
+        descricao: Hello world!
+    PublicacaoExemplo02:
+      value:
+        id: 2
+        nome: Exemplo 02
+        descricao: Hello world!
+    VendaExemplo01:
+      value:
+        id: 1
+        artigo: Havaianas
+        quantidade: 4
+        valor: 3
+    VendaExemplo02:
+      value:
+        id: 2
+        artigo: Camiseta
+        quantidade: 1
+        valor: 100
