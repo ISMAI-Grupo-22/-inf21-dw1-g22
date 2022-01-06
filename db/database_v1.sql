@@ -4,7 +4,7 @@ USE `social`;
 
 CREATE TABLE `Conta` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `nome` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `genero` varchar(45) NOT NULL,
   `senha` varchar(45) NOT NULL,
@@ -13,9 +13,10 @@ CREATE TABLE `Conta` (
 
 
 CREATE TABLE `Publicacao` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) NOT NULL,
   `nome` varchar(45) NOT NULL,
-  PRIMARY KEY (`nome`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
 

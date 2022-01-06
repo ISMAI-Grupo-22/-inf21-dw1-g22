@@ -32,10 +32,10 @@ exports.createConta = function(body) {
  * id Long 
  * no response value expected for this operation
  **/
- exports.deleteLesson = function (id) {
+exports.deleteConta = function (id) {
   return new Promise(function (resolve, reject) {
-    sql.query(
-      'DELETE FROM lesson WHERE id = ?',
+    db.query(
+      "DELETE FROM `Conta` WHERE id = ?",
       [id],
       (err, res) => {
         if (err || !res.affectedRows) {
@@ -56,29 +56,22 @@ exports.createConta = function(body) {
  *
  * returns List
  **/
-exports.retrieveConta = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "senha" : "senha",
-  "genero" : "genero",
-  "nome" : "nome",
-  "id" : 0,
-  "email" : "email"
-}, {
-  "senha" : "senha",
-  "genero" : "genero",
-  "nome" : "nome",
-  "id" : 0,
-  "email" : "email"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+exports.retrieveConta = function () {
+  return new Promise(function (resolve, reject) {
+    db.query(
+      "SELECT * FROM `Conta`", 
+    function (err) {
+      if (err) {
+        console.log(err);
+        reject(err);
+      } else {
+        console.log('retrieve success');
+        console.log(res);
+        resolve(res[0]);
+      }
+    });
   });
-}
+};
 
 
 /**
@@ -88,22 +81,23 @@ exports.retrieveConta = function() {
  * returns Conta
  **/
 exports.retrieveContaId = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "senha" : "senha",
-  "genero" : "genero",
-  "nome" : "nome",
-  "id" : 0,
-  "email" : "email"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+  return new Promise(function (resolve, reject) {
+    db.query(
+      "SELECT * FROM `Conta` WHERE id = ?", 
+      [id], 
+      (err, res) => {
+        if (err) {
+        console.log(err);
+        reject(err);
+      } else {
+        console.log('retrieve success');
+        console.log(res);
+        resolve(res[0]);
+      }
+    });
   });
-}
+};
+
 
 
 /**
@@ -114,8 +108,21 @@ exports.retrieveContaId = function(id) {
  * no response value expected for this operation
  **/
 exports.updateConta = function(body,id) {
-  return new Promise(function(resolve, reject) {
-    resolve();
+  return new Promise(function (resolve, reject) {
+    console.log(body);
+    db.query(
+      'UPDATE `Conta` set `nome` = ?, `email` = ?, `senha` = ?, `genero` = ? WHERE id = ?',
+      [body.nome, body.email, body.senha, body.genero, id],
+      (err, res) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          console.log('update success');
+          console.log(res);
+          resolve(id);
+        }
+      },
+    );
   });
-}
-
+};
