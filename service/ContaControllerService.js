@@ -18,7 +18,7 @@ exports.createConta = function(body) {
           console.log(err);
           reject(err);
         } else {
-          console.log("User created");
+          console.log("user created");
         }
       }
     );

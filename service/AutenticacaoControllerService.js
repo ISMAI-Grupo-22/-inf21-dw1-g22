@@ -18,9 +18,9 @@ exports.retrieveAutenticacao = function(req,res) {
         }
         else {
           if (result[0].password === req.body.password) {
-            console.log("User Confirmed");
+            console.log("user confirmed");
           }else{
-            console.log("User not found");
+            console.log("user not found");
           }
         }
       }

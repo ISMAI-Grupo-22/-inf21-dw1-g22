@@ -1,5 +1,5 @@
 'use strict';
-
+var db = require('../utils/db.js');
 
 /**
  * Create publicacao
@@ -7,45 +7,45 @@
  * body Publicacao  (optional)
  * returns Publicacao
  **/
-exports.createPublicacao = function(body) {
+ exports.createPublicacao = function(body) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "nome" : "nome",
-  "id" : 0,
-  "descricao" : "descricao"
+    console.log(body);
+    db.query(
+      "INSERT INTO `Publicacao` (`nome`, `descricao`) Values(?,?)",
+      [body.nome, body.descricao],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          console.log("insert success");
+        }
+      }
+    );
+  });      
 };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
-
 
 /**
  * Retrieve Publicacao
  *
  * returns List
  **/
-exports.retrievePublicacao = function() {
+ exports.retrievePublicacao = function(req,res) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "nome" : "nome",
-  "id" : 0,
-  "descricao" : "descricao"
-}, {
-  "nome" : "nome",
-  "id" : 0,
-  "descricao" : "descricao"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    db.query(
+      "SELECT * FROM `Publicacao`",
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        }
+        else {
+          console.log("Retrieve success");
+          console.log(res);
+          resolve(res[0]);
+        }
+      }
+    );
   });
-}
+};
 
