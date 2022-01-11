@@ -19,6 +19,7 @@ var db = require('../utils/db.js');
           reject(err);
         } else {
           console.log("insert success");
+          resolve(result.InsertedId);
         }
       }
     );
@@ -30,11 +31,11 @@ var db = require('../utils/db.js');
  *
  * returns List
  **/
- exports.retrievePublicacao = function(req,res) {
+ exports.retrievePublicacao = function() {
   return new Promise(function(resolve, reject) {
     db.query(
       "SELECT * FROM `Publicacao`",
-      (err, result) => {
+      (err, res) => {
         if (err) {
           console.log(err);
           reject(err);
@@ -42,7 +43,7 @@ var db = require('../utils/db.js');
         else {
           console.log("Retrieve success");
           console.log(res);
-          resolve(res[0]);
+          resolve(res);
         }
       }
     );

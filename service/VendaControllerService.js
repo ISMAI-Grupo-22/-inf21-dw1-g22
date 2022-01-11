@@ -1,5 +1,5 @@
 'use strict';
-
+var db = require('../utils/db.js');
 
 /**
  * Create venda
@@ -19,6 +19,7 @@
           reject(err);
         } else {
           console.log("sale created");
+          resolve(result.InsertedId);
         }
       }
     );
@@ -60,14 +61,14 @@
   return new Promise(function (resolve, reject) {
     db.query(
       "SELECT * FROM `Venda`", 
-    function (err) {
+    function (err, res) {
       if (err) {
         console.log(err);
         reject(err);
       } else {
         console.log('retrieve success');
         console.log(res);
-        resolve(res[0]);
+        resolve(res);
       }
     });
   });
@@ -92,7 +93,7 @@
       } else {
         console.log('retrieve success');
         console.log(res);
-        resolve(res[0]);
+        resolve(res);
       }
     });
   });

@@ -19,6 +19,8 @@ exports.createConta = function(body) {
           reject(err);
         } else {
           console.log("user created");
+          resolve(result.insertedId);
+
         }
       }
     );
@@ -60,14 +62,14 @@ exports.retrieveConta = function () {
   return new Promise(function (resolve, reject) {
     db.query(
       "SELECT * FROM `Conta`", 
-    function (err) {
+    function (err, res) {
       if (err) {
         console.log(err);
         reject(err);
       } else {
         console.log('retrieve success');
         console.log(res);
-        resolve(res[0]);
+        resolve(res);
       }
     });
   });
@@ -92,7 +94,7 @@ exports.retrieveContaId = function(id) {
       } else {
         console.log('retrieve success');
         console.log(res);
-        resolve(res[0]);
+        resolve(res);
       }
     });
   });
