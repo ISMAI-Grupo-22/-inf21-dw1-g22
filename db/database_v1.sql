@@ -12,6 +12,16 @@ CREATE TABLE `Conta` (
 ) ENGINE=InnoDB;
 
 
+CREATE TABLE `emprego` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `funcao` varchar(45) NOT NULL,
+  `contrato` varchar(45) NOT NULL,
+  `tipo` varchar(45) NOT NULL,
+  `empresa` varchar(45) NOT NULL,
+  `contacto` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
 CREATE TABLE `Publicacao` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) NOT NULL,

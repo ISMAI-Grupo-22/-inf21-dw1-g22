@@ -33,6 +33,10 @@ paths:
                   name: Conta
                 items:
                   $ref: '#/components/schemas/Conta'
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
       x-swagger-router-controller: ContaController
     post:
       tags:
@@ -54,6 +58,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Conta'
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
       x-swagger-router-controller: ContaController
   /Conta/{id}:
     get:
@@ -73,10 +81,10 @@ paths:
           format: int64
         examples:
           one:
-            summary: Retrieve Filme id 1
+            summary: Retrieve Conta id 1
             value: 1
           two:
-            summary: Retrieve Filme id 2
+            summary: Retrieve Conta id 2
             value: 2
       responses:
         "200":
@@ -164,30 +172,52 @@ paths:
         "404":
           description: id not found
       x-swagger-router-controller: ContaController
-  /Autenticacao:
+  /Emprego/:
     get:
       tags:
-      - AutenticacaoController
-      summary: Retrieve autenticacao
-      operationId: retrieveAutenticacao
+      - EmpregoController
+      summary: Retrieve emprego
+      operationId: retrieveEmprego
       responses:
         "200":
-          description: Array of Autenticacao model instances
+          description: Array of Emprego model instances
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Autenticacao'
+                  $ref: '#/components/schemas/Emprego'
                 x-content-type: application/json
-            application/xml:
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
+      x-swagger-router-controller: EmpregoController
+    post:
+      tags:
+      - EmpregoController
+      summary: Create emprego
+      operationId: createEmprego
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Emprego'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Emprego'
+      responses:
+        "200":
+          description: Creat a Emprego model instance
+          content:
+            application/json:
               schema:
-                type: array
-                xml:
-                  name: Publicacao
-                items:
-                  $ref: '#/components/schemas/Autenticacao'
-      x-swagger-router-controller: AutenticacaoController
+                $ref: '#/components/schemas/Emprego'
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
+      x-swagger-router-controller: EmpregoController
   /Publicacao:
     get:
       tags:
@@ -209,6 +239,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Publicacao'
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
       x-swagger-router-controller: PublicacaoController
     post:
       tags:
@@ -230,6 +264,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Publicacao'
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
       x-swagger-router-controller: PublicacaoController
   /Venda:
     get:
@@ -252,6 +290,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Venda'
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
       x-swagger-router-controller: VendaController
     post:
       tags:
@@ -273,6 +315,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Venda'
+        "400":
+          description: Bad request
+        "404":
+          description: id not found
       x-swagger-router-controller: VendaController
   /Venda/{id}:
     get:
@@ -337,9 +383,9 @@ paths:
             schema:
               $ref: '#/components/schemas/Venda'
             examples:
-              FilmeExample01:
+              VendaExample01:
                 $ref: '#/components/examples/VendaExemplo01'
-              FilmeExample02:
+              VendaExample02:
                 $ref: '#/components/examples/VendaExemplo02'
         required: true
       responses:
@@ -412,21 +458,38 @@ components:
         nome: nome
         id: 0
         email: email
-    Autenticacao:
-      title: Autenticacao
+    Emprego:
+      title: Emprego
       required:
-      - email
-      - senha
+      - contacto
+      - contrato
+      - empresa
+      - funcao
+      - tipo
       type: object
       properties:
-        email:
+        id:
+          type: integer
+          format: int64
+        funcao:
           type: string
-        senha:
+        contrato:
           type: string
+        tipo:
+          type: string
+        empresa:
+          type: string
+        contacto:
+          type: integer
+          format: int64
       additionalProperties: false
       example:
-        senha: senha
-        email: email
+        funcao: funcao
+        tipo: tipo
+        contacto: 6
+        contrato: contrato
+        id: 0
+        empresa: empresa
     Publicacao:
       title: Publicacao
       required:
@@ -491,14 +554,22 @@ components:
         genero: Feminino
         email: exemplo02@ismai.pt
         senha: exemplo02
-    AutenticacaoExemplo01:
+    EmpregoExemplo01:
       value:
-        email: exemplo01@ismai.pt
-        senha: exemplo01
-    AutenticacaoExemplo02:
+        id: 1
+        funcao: Desenvolvedor
+        contrato: Termo certo
+        tipo: Full time
+        empresa: ISMAI Software
+        contacto: cv.emprego@ismai.pt
+    EmpregoExemplo02:
       value:
-        email: exemplo02@ismai.pt
-        senha: exemplo02
+        id: 2
+        funcao: Desenvolvedor
+        contrato: Termo incerto
+        tipo: Part time
+        empresa: ISMAI Software
+        contacto: cv.emprego@ismai.pt
     PublicacaoExemplo01:
       value:
         id: 1
